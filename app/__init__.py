@@ -1,0 +1,1 @@
+from .prediction.predict import predict_many, predict_one
