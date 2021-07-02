@@ -67,9 +67,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
             # Threshold for AudioSegment ~ 7 seconds in length
             
-            
-            
-            if segment_counter == 18:
+            if segment_counter == 10:
                 
                 full_file_path = f"_temp_files_many/file{file_counter}c{file_counter}.wav"
                 
