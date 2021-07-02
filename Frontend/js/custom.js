@@ -128,6 +128,7 @@ document.getElementById('ppbutton').addEventListener('click', function () {
     if (ws != null) {
       ws.close();
     }
+    location.reload();
   } else {
     this.classList.add('active');
     icon.classList.remove('fa-play');

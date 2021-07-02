@@ -82,7 +82,8 @@ async def websocket_endpoint(websocket: WebSocket):
 
         elif data['type'] == 'websocket.disconnect':
             await websocket.close()
-            break
+            print("Connection Closed")
+            return
         
 @app.post("/api/wav_files/")
 async def create_upload_files(files: List[UploadFile] = File(...)):
