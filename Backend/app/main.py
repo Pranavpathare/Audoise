@@ -95,6 +95,10 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
     Returns:
         Json: File wise Predictions separated by 4 seconds.
     """
+
+    if len(files) > 3:
+        return {" ": {"mode": "File Limit Exceeded"}}
+        
     filename = "_temp_files_one/myfilem.wav"
     res_json = {}
     file_counter = 0
@@ -107,7 +111,5 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
         res_json[upload_file.filename + str(file_counter)] = predict_many(filename)
         
         os.remove(filename)
-        
-    print(res_json)
     
     return res_json
