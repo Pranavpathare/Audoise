@@ -26,7 +26,7 @@ Start the Backend Server
 
 Start Frontend
 
-- `cd frontend`
+- `cd audoise/frontend`
 - open `index.html` in your browser
 
 ---
