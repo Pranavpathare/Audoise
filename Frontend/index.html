@@ -42,7 +42,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                     </li> -->
 
                     <li class="nav-item">
-                        <a href="http://localhost:8000/docs#/default" class="nav-link smoothScroll">API Docs</a>
+                        <a href="http://localhost:8000/docs" class="nav-link smoothScroll">API Docs</a>
                     </li>
 
                     <li class="nav-item">
@@ -155,7 +155,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                       Upload Files & Analyze
                     </button>
 
-                    <p data-aos="fade-up" data-aos-delay="200">• Maximum 3 Files are allowed.<br />• We do not store your Data</p>
+                    <p data-aos="fade-up" data-aos-delay="200">• Maximum 3 Files are allowed.<br />• We do not store your Data<br />• Only .wav files Permitted</p>
 
                     
                 </div>
@@ -193,21 +193,26 @@ https://www.tooplate.com/view/2119-gymso-fitness
                             <div class="d-flex flex-column justify-content-center ml-lg-auto mr-lg-1 col-md-11">
                                 <h2 class="mb-4" data-aos="fade-up" data-aos-delay="300">The Technology</h2>
 
-                                <p data-aos="fade-up" data-aos-delay="400" class="tech"><b>WebSocket</b><br>
-                                    • Developed with FastAPI-Python<br>
+                                <p data-aos="fade-up" data-aos-delay="100" class="tech"><b>WebSocket</b><br>
                                     • Realtime WebSocket converts Microphone data into binary stream.<br>
-                                    • Stream is converted back into wav at server into chunks of length 6-7 seconds.<br>
-                                    • Prediction is Returned in Real Time.<br><br>
+                                    • Stream is converted back into wav at server into .wav chunks of length 6-7 seconds.<br>
+                                    • Prediction by Model is Returned in Real Time.<br><br>
 
                                     <b>Deep Learning Model</b><br>
-                        • Long audio samples are split into Smaller audio samples (len < 1 min)<br>
-                        • 80 MFCC Features are extracted from each audio clip.<br>
-                        • These are fed to a 1D CNN with 3 Convolutional Layers.<br>
-                        • Final Accuracy : 78.8 %<br>
-                    </p>
+                                    • Long audio samples are split into Smaller audio samples (len < 1 min)<br>
+                                    • 80 MFCC Features are extracted from each audio clip.<br>
+                                    • These are fed to a 1D CNN with 3 Convolutional Layers.<br>
+                                    • Final Accuracy : 78.8 %<br>
+
+                                    <br><b>Tech Stack</b><br>
+                                    • Frontend: Websockets, Javscript, HTML, CSS, Bootstrap<br>
+                                    • Backend Server: FastAPI (Async) for both Sockets and REST File Transfer.<br>
+                                    • Backend Model: Tensorflow, Librosa for Audio Feature Extraction<br>
+                                    • Deployment : AWS EC2, nginx, uvicorn (ASGI)<br>
+                                </p>
 
 
-                                <p class="more-info" data-aos="fade-up" data-aos-delay="500">More on <a rel="nofollow" href="https://github.com/Pranavpathare/Audoise" target="_parent">Github</a>.<br>You can view the Swagger Docs at <a rel="nofollow" href="http://localhost:8000/docs#/default" target="_parent">Docs.</a></p>
+                                <p class="more-info" >More on <a rel="nofollow" href="https://github.com/Pranavpathare/Audoise" target="_parent">Github</a>.<br>View the <a rel="nofollow" href="http://localhost:8000/docs" target="_parent">Swagger Docs.</a></p>
 
                             </div>
                     </div>

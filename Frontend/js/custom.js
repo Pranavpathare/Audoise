@@ -1,3 +1,6 @@
+var wslink = 'ws://localhost:8000/ws/audio_stream';
+var filelink = 'http://localhost:8000/api/wav_files/';
+
 $(function () {
   // MENU
   $('.navbar-collapse a').on('click', function () {
@@ -33,7 +36,7 @@ var resultfile = document.getElementById('resultfile');
 var result = document.getElementById('result');
 
 var wesocket = async () => {
-  const symblEndpoint = 'ws://127.0.0.1:8000/ws/audio_stream';
+  const symblEndpoint = wslink;
 
   ws = new WebSocket(symblEndpoint);
 
@@ -145,7 +148,7 @@ function doupload() {
     data.append('files', file, file.name);
   }
 
-  fetch('http://localhost:8000/api/wav_files/', {
+  fetch(filelink, {
     method: 'POST',
     body: data,
   })

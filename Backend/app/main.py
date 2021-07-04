@@ -9,6 +9,8 @@ from utils import write_to_file_wav
 
 from prediction.predict import predict_one, predict_many
 
+import uvicorn
+
 from pydub import AudioSegment        # Bytes to Wave
 
 import os
@@ -22,8 +24,6 @@ app.add_middleware(
     allow_origins=origins
 )
 
-
-        
 @app.websocket("/ws/audio_stream")
 async def websocket_endpoint(websocket: WebSocket):
     """AudioStream Websocket Sentiment Analyzer.
@@ -114,3 +114,7 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
         os.remove(filename)
     
     return res_json
+
+
+if __name__=="__main__":
+    uvicorn.run("main:app",host='0.0.0.0', port=80)
