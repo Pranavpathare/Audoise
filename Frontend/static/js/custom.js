@@ -1,14 +1,42 @@
-VanillaTilt.init(document.querySelectorAll('.container'), {
-  max: 6,
-  speed: 10,
+var wslink = 'ws://65.0.102.229:5000/ws/audio_stream';
+var filelink = 'http://65.0.102.229:5000/api/wav_files/';
+
+$(function () {
+  // MENU
+  $('.navbar-collapse a').on('click', function () {
+    $('.navbar-collapse').collapse('hide');
+  });
+
+  // AOS ANIMATION
+  AOS.init({
+    disable: 'mobile',
+    duration: 800,
+    anchorPlacement: 'center-bottom',
+  });
+
+  // SMOOTHSCROLL NAVBAR
+  $(function () {
+    $('.navbar a, .hero-text a').on('click', function (event) {
+      var $anchor = $(this);
+      $('html, body')
+        .stop()
+        .animate(
+          {
+            scrollTop: $($anchor.attr('href')).offset().top - 49,
+          },
+          1000
+        );
+      event.preventDefault();
+    });
+  });
 });
 
 var ws = null;
-var cont1 = document.getElementById('c1');
-var ct3 = document.getElementById('ct3');
-var sentres = document.getElementById('sentiment-result');
+var resultfile = document.getElementById('resultfile');
+var result = document.getElementById('result');
+
 var wesocket = async () => {
-  const symblEndpoint = 'ws://127.0.0.1:8000/ws/audio_stream';
+  const symblEndpoint = wslink;
 
   ws = new WebSocket(symblEndpoint);
 
@@ -17,14 +45,15 @@ var wesocket = async () => {
     console.log('Connection to Websocket initialised');
     const data = JSON.parse(event.data);
     var emotion = data.Result;
+    console.log(emotion);
 
-    if (emotion != null) sentres.innerHTML = 'Sentiment Predicted: ' + emotion;
+    if (emotion != null) result.innerHTML = emotion;
 
-    if (cont1.classList.length == 3) {
-      cont1.classList.remove(cont1.classList[2]);
-      cont1.classList.add(emotion);
-    } else if (cont1.classList.length == 2) {
-      cont1.classList.add(emotion);
+    if (result.classList.length == 2) {
+      result.classList.remove(result.classList[1]);
+      result.classList.add(emotion);
+    } else if (result.classList.length == 1) {
+      result.classList.add(emotion);
     }
   };
 
@@ -36,10 +65,10 @@ var wesocket = async () => {
   // Fired when the WebSocket connection has been closed
   ws.onclose = (event) => {
     console.info('Connection to websocket closed');
-    if (cont1.classList.length == 3) {
-      cont1.classList.remove(cont1.classList[2]);
+    if (result.classList.length == 2) {
+      result.classList.remove(result.classList[1]);
     }
-    sentres.innerHTML = '';
+    result.innerHTML = 'Please Click Play';
     ws.send(
       JSON.stringify({
         close: true,
@@ -95,51 +124,46 @@ var wesocket = async () => {
 
 document.getElementById('ppbutton').addEventListener('click', function () {
   var icon = document.getElementById('ppicon');
-  var animation = document.getElementById('animationloader');
 
   if (this.classList.contains('active')) {
     this.classList.remove('active');
     icon.classList.remove('fa-pause');
     icon.classList.add('fa-play');
-    animation.classList.remove('loader');
     if (ws != null) {
       ws.close();
     }
+    location.reload();
   } else {
     this.classList.add('active');
     icon.classList.remove('fa-play');
     icon.classList.add('fa-pause');
-    animation.classList.add('loader');
     wesocket();
   }
 });
 
 function doupload() {
   let acceptedFiles = document.getElementById('file').files;
-  ct3.innerText = 'Processing Files';
+  resultfile.innerText = 'Processing Files';
   const data = new FormData();
   for (const file of acceptedFiles) {
     data.append('files', file, file.name);
   }
 
-  fetch('http://localhost:8000/api/wav_files/', {
+  fetch(filelink, {
     method: 'POST',
     body: data,
   })
     .then((response) => response.json())
     .then((data) => {
-      ct3.innerText = 'Data Recieved';
-
-      let text = 'Analysis: \n';
+      resultfile.innerText = 'Data Recieved';
+      resultfile.classList.add('active');
+      let text = '';
       for (const key in data) {
         text += key;
-        text += ':   ';
+        text += ': ';
         text += data[key]['mode'];
         text += '\n\n';
       }
-      ct3.innerText = text;
+      resultfile.innerText = text;
     });
-
-  // alert('your file has been uploaded');
-  // location.reload();
 }

@@ -1,7 +1,9 @@
 from typing import List               # Python Type Checking
 
-from fastapi import FastAPI, WebSocket
-from fastapi import File, UploadFile
+from fastapi import FastAPI, WebSocket, File, UploadFile, Form, Request
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 # from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -46,7 +48,6 @@ async def websocket_endpoint(websocket: WebSocket):
         file_counter += 1
         
         data = await websocket.receive()
-        
         if 'bytes' in data:
             
             bytearr = data['bytes']
@@ -114,6 +115,14 @@ async def create_upload_files(files: List[UploadFile] = File(...)):
         os.remove(filename)
     
     return res_json
+
+
+app.mount("/static", StaticFiles(directory="../../Frontend/static"), name="static")
+templates = Jinja2Templates(directory="../../Frontend/templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def example(request: Request):
+    return templates.TemplateResponse("index1.html", {"request": request})
 
 
 if __name__=="__main__":

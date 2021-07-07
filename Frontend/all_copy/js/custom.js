@@ -1,5 +1,5 @@
-var wslink = 'ws://localhost:8000/ws/audio_stream';
-var filelink = 'http://localhost:8000/api/wav_files/';
+var wslink = 'ws://65.0.102.229:5000/ws/audio_stream';
+var filelink = 'http://65.0.102.229:5000/api/wav_files/';
 
 $(function () {
   // MENU
@@ -45,6 +45,7 @@ var wesocket = async () => {
     console.log('Connection to Websocket initialised');
     const data = JSON.parse(event.data);
     var emotion = data.Result;
+    console.log(emotion);
 
     if (emotion != null) result.innerHTML = emotion;
 

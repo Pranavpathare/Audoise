@@ -10,13 +10,11 @@
      <meta name="keywords" content="">
      <meta name="author" content="">
      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-     <link rel="stylesheet" href="css/bootstrap.min.css">
-     <link rel="stylesheet" href="css/font-awesome.min.css">
-     <link rel="stylesheet" href="css/aos.css">
+     <link rel="stylesheet" href="{{url_for('static', filename='css/font-awesome.min.css')}}">
+     <link rel="stylesheet" href="{{url_for('static', filename='css/aos.css')}}">
 
      <!-- MAIN CSS -->
-     <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+     <link rel="stylesheet" href="{{url_for('static', filename='css/tooplate-gymso-style.css')}}">
 <!--
 Tooplate 2119 Gymso Fitness
 https://www.tooplate.com/view/2119-gymso-fitness
@@ -28,7 +26,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
 
-            <a class="navbar-brand" href="index.html">Audoise</a>
+            <a class="navbar-brand" href="/">Audoise</a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -42,7 +40,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                     </li> -->
 
                     <li class="nav-item">
-                        <a href="http://localhost:8000/docs" class="nav-link smoothScroll">API Docs</a>
+                        <a href="http://65.0.102.229:5000/docs" class="nav-link smoothScroll">API Docs</a>
                     </li>
 
                     <li class="nav-item">
@@ -212,7 +210,7 @@ https://www.tooplate.com/view/2119-gymso-fitness
                                 </p>
 
 
-                                <p class="more-info" >More on <a rel="nofollow" href="https://github.com/Pranavpathare/Audoise" target="_parent">Github</a>.<br>View the <a rel="nofollow" href="http://localhost:8000/docs" target="_parent">Swagger Docs.</a></p>
+                                <p class="more-info" >More on <a rel="nofollow" href="https://github.com/Pranavpathare/Audoise" target="_parent">Github</a>.<br>View the <a rel="nofollow" href="http://65.0.102.229:5000/docs" target="_parent">Swagger Docs.</a></p>
 
                             </div>
                     </div>
@@ -244,11 +242,11 @@ https://www.tooplate.com/view/2119-gymso-fitness
      </footer>
 
      <!-- SCRIPTS -->
-     <script src="js/jquery.min.js"></script>
-     <script src="js/bootstrap.min.js"></script>
-     <script src="js/aos.js"></script>
-     <script src="js/smoothscroll.js"></script>
-     <script src="js/custom.js"></script>
+     <script src="{{url_for('static', filename='js/jquery.min.js')}}"></script>
+     <script src="{{url_for('static', filename='js/bootstrap.min.js')}}"></script>
+     <script src="{{url_for('static', filename='js/aos.js')}}"></script>
+     <script src="{{url_for('static', filename='js/smoothscroll.js')}}"></script>
+     <script src="{{url_for('static', filename='js/custom.js')}}"></script>
 
 </body>
 </html>
